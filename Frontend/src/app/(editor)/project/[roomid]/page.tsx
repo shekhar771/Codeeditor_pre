@@ -33,12 +33,12 @@ export default function Page() {
   ];
 
   return (
-    <div className="mx-1 w-full">
+    <div className="mx-1 my-1 w-full">
       {/* header part for code */}
 
       <Navbar />
 
-      <div className="h-screen bg-background border-border flex">
+      <div className="h-screen bg-background border-border  flex">
         {fileOpen ? (
           <div className="border-r border-border p-1 w-fit min-w-32 md:min-w-[200px] md:max-w-[300px] bg-sidebar">
             <SideBar />
