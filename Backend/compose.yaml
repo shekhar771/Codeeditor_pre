@@ -11,15 +11,17 @@ services:
   server:
     build:
       context: .
-      target: development  # ← ADD THIS LINE
+      target: development
     environment:
-      NODE_ENV: development  # ← CHANGE FROM production
+      NODE_ENV: development
+      CHOKIDAR_USEPOLLING: "true"  # For Windows file watching
     ports:
       - "3022:3022"
-    volumes:  # ← ADD THIS SECTION
+    volumes:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
-
+    # Auto-restart on failure
+    restart: unless-stopped
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to
 # start the database before your application. The `db-data` volume persists the

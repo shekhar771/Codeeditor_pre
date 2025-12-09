@@ -32,3 +32,14 @@
 **/dist
 LICENSE
 README.md
+node_modules
+npm-debug.log
+dist
+.env
+.git
+.gitignore
+README.md
+Dockerfile*
+docker-compose*
+.vscode
+.idea
