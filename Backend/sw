@@ -1,0 +1,16 @@
+-- WARNING: This schema is for context only and is not meant to be run.
+-- Table order and constraints may not be valid for execution.
+
+CREATE TABLE public.users (
+  id integer NOT NULL DEFAULT nextval('users_id_seq'::regclass),
+  email character varying NOT NULL UNIQUE,
+  password_hash character varying,
+  google_id character varying UNIQUE,
+  email_verified boolean DEFAULT false,
+  verification_token character varying,
+  password_reset_token character varying,
+  reset_token_expires timestamp without time zone,
+  created_at timestamp without time zone DEFAULT now(),
+  updated_at timestamp without time zone DEFAULT now(),
+  CONSTRAINT users_pkey PRIMARY KEY (id)
+);
