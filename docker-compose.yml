@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  # 1. REDIS (The Queue)
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379" # Optional: For debugging Redis from your laptop
+    restart: always
+
+  # 2. WORKER (The Execution Engine)
+  worker:
+    build:
+      context: ./worker
+      dockerfile: Dockerfile
+    container_name: worker
+    restart: always
+    # CRITICAL: This gives the container control over Docker
+    volumes:
+      - ./worker:/app                 # Sync Code
+      - /app/node_modules             # Keep Linux dependencies separate
+      - /var/run/docker.sock:/var/run/docker.sock # Access Docker Socket
+    environment:
+      - NODE_ENV=development
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    ports:
+      - "3023:3023" #Expose API to host
+    depends_on:
+      - redis
+
+  # 3. ORCHESTRATOR (The API)
+  orchestrator:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: Backend
+    restart: always
+    ports:
+      - "3022:3022" #Expose API to host
+    volumes:
+      - ./orchestrator:/app           # Sync Code
+      - /app/node_modules             # Keep Linux dependencies separate
+    environment:
+      - NODE_ENV=development
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - redis

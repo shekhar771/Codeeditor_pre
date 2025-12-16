@@ -20,7 +20,7 @@ RUN npm ci
 COPY . .
 
 # Expose port
-EXPOSE 3022
+EXPOSE 3023
 
 # Run the dev command - FIXED: "run" was missing!
 CMD ["npm", "run", "dev"]
