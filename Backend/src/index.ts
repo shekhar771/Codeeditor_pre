@@ -1,4 +1,5 @@
 import { ENV } from './env' // <- FIRST import
+import WorkerRouter from './routes/workerrouter'
 console.log('GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID)
 console.log(
   'GOOGLE_CLIENT_SECRET:',
@@ -45,14 +46,20 @@ app.use((_, res, next) => {
 })
 
 // Routes
+app.use('/execute', WorkerRouter)
+// app.get('/', WorkerRouter)
+
 app.use('/auth', AuthRouter)
 app.get('/', (req, res) => {
   res.send('Hello World!')
   console.log('GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID)
+  console.log('yooo')
   console.log(
     'GOOGLE_CLIENT_SECRET:',
     process.env.GOOGLE_CLIENT_SECRET ? ' Loaded' : ' Missing'
-  )
+  )  
+  console.log('yooo')
+
 })
 app.listen(3022, () => {
   console.log('🚀 Server running on http://localhost:3022')

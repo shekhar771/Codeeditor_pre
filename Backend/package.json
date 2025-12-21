@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "@types/pg": "^8.15.5",
-    "bullmq": "^5.66.0",
+    "bullmq": "^5.66.2",
     "dockerode": "^4.0.9",
     "express": "^5.1.0",
     "ioredis": "^5.8.2",
@@ -17,7 +17,7 @@
     "@types/dockerode": "^3.3.47",
     "@types/express": "^5.0.3",
     "@types/express-session": "^1.18.2",
-    "@types/node": "^24.10.3",
+    "@types/node": "^24.10.4",
     "@types/passport": "^1.0.17",
     "@types/passport-google-oauth20": "^2.0.16",
     "dotenv": "^17.2.2",

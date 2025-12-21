@@ -1,25 +1,12 @@
-
-import express from 'express'
-
-
-console.log("🚀 Worker process starting...");
-
-
-// Middleware to parse JSON
 import { Worker } from "bullmq";
-import Redis from "ioredis";    
-import Dockerode from 'dockerode';
-
-
-const docker = new Dockerode();
+import Redis from "ioredis";
 
 const redis = new Redis({
   host: process.env.REDIS_HOST || "redis",
   port: Number(process.env.REDIS_PORT) || 6379,
   password: process.env.REDIS_PASSWORD,
-  maxRetriesPerRequest: null,
-
 });
+
 
 const worker = new Worker(
   "myQueue",
